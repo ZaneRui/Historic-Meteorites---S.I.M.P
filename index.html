@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html>
+
+ 
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>replit</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+   <nav>
+     <div class="logo-image">
+            <img style="position: relative;" src="https://i.dlpng.com/static/png/6794126_preview.png" class="img-fluid">
+      </div>
+   
+    </a>
+     
+     <h1 style="text-align: center;"> Historic Meteorite Landings </h1>
+
+    </nav>
+
+  
+  
+  <section>
+          <input type="search" id="searchKey" placeholder="Search a name">
+          <button onclick=search()>Search</button>
+        </section>  
+  
+  
+  <main>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name <button onclick="sortByName()">Sort</button> </th>
+          <th>Meteorite ID</th>
+          <th>Mass(kg)</th>
+          <th>Year of Landing</th>
+        </tr>
+      </thead>
+      <tbody id= "result">
+       </tbody>
+
+     </table>
+  
+    </main>
+  <script src="lib.js"></script>
+
+<script>
+
+//create a render function
+    function rowTemplate({name, id, mass, year}){
+      let result = document.querySelector('#result');
+      return `<tr>
+        <td>${name}</td>
+        <td>${id}</td>
+        <td>${mass}</td>
+        <td>${year}</td>
+      </tr>`;
+    }
+  
+
+//call renderItem()
+  async function showAllLandings(){
+    let data = await Lib.getData('https://data.nasa.gov/resource/gh4g-9sfh.json');
+    data = data.slice(0, 100);
+    Lib.renderCollection(data, rowTemplate, '#result');
+} 
+
+  
+showAllLandings();
+
+  
+</script> 
+
+  <footer>
+  <p> 
+    <span>
+    Powered by:
+    </span> 
+    S.I.M.P 
+  </p>
+</footer>
+
+</body>
+
+</html>
